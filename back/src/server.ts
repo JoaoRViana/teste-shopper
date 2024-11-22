@@ -1,5 +1,5 @@
 import { App } from './app';
 
-const PORT = process.env.APP_PORT || 80;
+const PORT = 8080;
 
 new App().start(PORT);

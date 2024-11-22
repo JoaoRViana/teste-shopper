@@ -1,5 +1,6 @@
 import express, { Express, RequestHandler } from 'express';
-import router from './routes';
+import router from './routes'
+import { getRouteData } from './utils';
 
 class App {
   public app: Express;
@@ -30,5 +31,7 @@ class App {
     this.app.use(router);
   }
 }
+
+getRouteData("1800 Amphitheatre Parkway, Mountain View, CA 94043", "Sloat Blvd &, Upper Great Hwy, San Francisco, CA 94132");
 
 export { App };
