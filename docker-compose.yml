@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  back:
+    build:
+      context: ./back
+    container_name: back-app
+    ports:
+      - "8080:8080" 
+    volumes:
+      - ./back/src:/usr/src/app/src 
+    environment:
+      - NODE_ENV=development
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY} 
+    networks:
+      - app-network
+
+  front:
+    build:
+      context: ./front
+    container_name: front-app
+    ports:
+      - "80:80" 
+    volumes:
+      - ./front/src:/usr/src/app/src 
+    networks:
+      - app-network
+    depends_on:
+      - back 
+volumes:
+  db_data:
+networks:
+  app-network:
+    driver: bridge

@@ -32,6 +32,4 @@ class App {
   }
 }
 
-getRouteData("1800 Amphitheatre Parkway, Mountain View, CA 94043", "Sloat Blvd &, Upper Great Hwy, San Francisco, CA 94132");
-
 export { App };
