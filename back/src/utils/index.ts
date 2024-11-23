@@ -5,38 +5,26 @@ import path from "path";
 const envPath =  path.resolve(__dirname,'../../../.env')
 dotenv.config({path:envPath});
 const apiKey = process.env.GOOGLE_API_KEY;
-export const getRouteData = async (origin: string, destination: string) => {
+export const getRouteData = async (addressOrigin: string, addressDestination: string) => {
     const data = {
         origin: {
-            address: origin,
+            address: addressOrigin,
         },
         destination: {
-            address: destination,
+            address: addressDestination,
         },
         travelMode: "DRIVE",
+        computeAlternativeRoutes:false,
     };
-    const originCoordinates = await(getCoordinates(origin))
-    const destinationCoodinates = await(getCoordinates(destination))
     const url = `https://routes.googleapis.com/directions/v2:computeRoutes`;
         const response = await axios.post(url, data, {
             headers: {
                 "Content-Type": "application/json",
                 "X-Goog-Api-Key": apiKey, 
-                "X-Goog-FieldMask": "routes",
+                "X-Goog-FieldMask": "routes.duration,routes.distanceMeters,routes.legs.startLocation.latLng,routes.legs.endLocation.latLng",
             },
         });
-    console.log({origin:originCoordinates,destination:destinationCoodinates,distance:response.data})
-    return{origin:originCoordinates,destination:destinationCoodinates,distance:response.data}
-};
-
-
-const getCoordinates = async (address: string) => {
-    const geocodingUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${apiKey}`;
-    const response = await axios.get(geocodingUrl);
-    if (response.data.status === 'OK') {
-        const location = response.data.results[0].geometry.location;
-        return location;
-    } else {
-        throw new Error('Geocoding API não conseguiu encontrar o endereço.');
-    }
+    const origin = {latitude:response.data.routes[0].legs[0].startLocation.latLng}
+    const destination = {latitude:response.data.routes[0].legs[0].endLocation.latLng}
+    return{duration:response.data.routes[0].duration,distance:response.data.routes[0].distanceMeters,origin,destination,routeResponse:response.data}
 };
