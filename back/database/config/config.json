@@ -1,0 +1,12 @@
+{
+  "username": "root",
+  "password": "root",
+  "database": "shopper",
+  "host": "db",
+  "port": 3306,
+  "dialect": "mysql",
+  "dialectOptions": {
+    "timezone": "Z"
+  },
+  "logging": false
+}

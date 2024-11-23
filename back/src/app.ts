@@ -1,6 +1,5 @@
 import express, { Express, RequestHandler } from 'express';
 import router from './routes'
-import { getRouteData } from './utils';
 
 class App {
   public app: Express;
@@ -8,6 +7,7 @@ class App {
   constructor() {
     this.app = express();
     this.config();
+    this.app.get('/', (req:any, res:any) => res.json({ ok: true }));
     this.routes();
   }
 

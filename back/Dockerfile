@@ -1,14 +1,12 @@
 FROM node:18-alpine
 
-WORKDIR /usr/src/app
+WORKDIR /back-app
 
 COPY package*.json ./
 
 RUN npm install
 
-COPY ./src ./src
-
-COPY tsconfig.json .
+COPY . .
 
 RUN npm install -g typescript
 RUN tsc

@@ -4,9 +4,10 @@
     "module": "commonjs",
     "strict": true,
     "esModuleInterop": true,
+    "noImplicitAny": false,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "outDir": "./dist"
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*.ts", "database/**/*.ts"],
 }

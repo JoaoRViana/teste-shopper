@@ -2,33 +2,33 @@ version: '3.8'
 
 services:
   back:
-    build:
-      context: ./back
+    build: ./back
     container_name: back-app
     ports:
       - "8080:8080" 
     volumes:
-      - ./back/src:/usr/src/app/src 
+      - ./back/src:/app-back/src
     environment:
       - NODE_ENV=development
-      - GOOGLE_API_KEY=${GOOGLE_API_KEY} 
-    networks:
-      - app-network
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
 
   front:
-    build:
-      context: ./front
+    build: ./front
     container_name: front-app
     ports:
       - "80:80" 
     volumes:
-      - ./front/src:/usr/src/app/src 
-    networks:
-      - app-network
+      - ./front/src:/app-front/src
     depends_on:
-      - back 
+      - back
+  db:
+    image: mysql:8.0.32
+    container_name: db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: shopper
+    ports:
+      - "3306:3306" 
 volumes:
   db_data:
-networks:
-  app-network:
-    driver: bridge
+
