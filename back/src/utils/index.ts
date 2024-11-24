@@ -16,7 +16,8 @@ export const getRouteData = async (addressOrigin: string, addressDestination: st
         travelMode: "DRIVE",
         computeAlternativeRoutes:false,
     };
-    const url = `https://routes.googleapis.com/directions/v2:computeRoutes`;
+    try {
+        const url = `https://routes.googleapis.com/directions/v2:computeRoutes`;
         const response = await axios.post(url, data, {
             headers: {
                 "Content-Type": "application/json",
@@ -24,7 +25,11 @@ export const getRouteData = async (addressOrigin: string, addressDestination: st
                 "X-Goog-FieldMask": "routes.duration,routes.distanceMeters,routes.legs.startLocation.latLng,routes.legs.endLocation.latLng",
             },
         });
-    const origin = {latitude:response.data.routes[0].legs[0].startLocation.latLng}
-    const destination = {latitude:response.data.routes[0].legs[0].endLocation.latLng}
-    return{duration:response.data.routes[0].duration,distance:response.data.routes[0].distanceMeters,origin,destination,routeResponse:response.data}
+        const origin = {latitude:response.data.routes[0].legs[0].startLocation.latLng}
+        const destination = {latitude:response.data.routes[0].legs[0].endLocation.latLng}
+        return{duration:response.data.routes[0].duration,distance:response.data.routes[0].distanceMeters,origin,destination,routeResponse:response.data}
+    } catch (error) {
+        return {error:400}
+    }
+   
 };

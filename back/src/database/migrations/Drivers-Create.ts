@@ -9,23 +9,28 @@ module.exports = {
         primaryKey: true,
         autoIncrement: true,
       },
-      nome: {
+      name: {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      descrição: {
+      description: {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      carro: {
+      vehicle: {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      avaliação: {
-        type: Sequelize.STRING,
+      rating: {
+        type: Sequelize.INTEGER,
         allowNull: true,
       },
-      taxa: {
+      comment:{
+        type:Sequelize.STRING,
+        allowNull: true,
+
+      },
+      value: {
         type: Sequelize.STRING,
         allowNull: true,
       },

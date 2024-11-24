@@ -9,11 +9,12 @@ import db from '.';
 
 class DriverModel extends Model<InferAttributes<DriverModel>, InferCreationAttributes<DriverModel>> {
   declare id: CreationOptional<number>;
-  declare nome: string;
-  declare descrição: string;
-  declare carro: string;
-  declare avaliação: string;
-  declare taxa: string;
+  declare name: string;
+  declare description: string;
+  declare vehicle: string;
+  declare comment: string;
+  declare rating:number;
+  declare value: number;
   declare km_mínimo: number;
 }
 
@@ -24,20 +25,23 @@ DriverModel.init({
     primaryKey: true,
     autoIncrement: true,
   },
-  nome: {
+  name: {
     type: DataTypes.STRING,
   },
-  descrição: {
+  description: {
     type: DataTypes.STRING,
   },
-  carro: {
+  vehicle: {
     type: DataTypes.STRING,
   },
-  avaliação: {
+  comment:{
     type: DataTypes.STRING,
   },
-  taxa: {
-    type: DataTypes.STRING,
+  rating: {
+    type: DataTypes.INTEGER,
+  },
+  value: {
+    type: DataTypes.INTEGER,
   },
   km_mínimo: {
     type: DataTypes.INTEGER,
