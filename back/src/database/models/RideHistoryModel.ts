@@ -13,6 +13,7 @@ class RideHistoryModel extends Model<InferAttributes<RideHistoryModel>, InferCre
   declare distance: number;
   declare duration: string;
   declare value: number;
+  declare date:Date;
 }
 
 RideHistoryModel.init(
@@ -22,6 +23,11 @@ RideHistoryModel.init(
       allowNull: false,
       primaryKey: true,
       autoIncrement: true,
+    },
+    date:{
+      type:DataTypes.DATE,
+      allowNull:false,
+      defaultValue:DataTypes.NOW
     },
     customer_id: {
         type: DataTypes.STRING,
@@ -51,7 +57,7 @@ RideHistoryModel.init(
     sequelize: db,
     underscored: true,
     modelName: 'rideHistories',
-    timestamps: true,
+    timestamps: false,
   }
 );
 

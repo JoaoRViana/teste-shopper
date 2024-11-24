@@ -17,4 +17,11 @@ export default class RideController{
         const {status,message} = await this.rideService.rideConfirm(customer_id,origin,destination,distance,duration,id,name,value);
         return res.status(status).json(message)
     }
+
+    public async getHistory(req:Request,res:Response):Promise<any>{
+        const{customer_id} = req.params;
+        const {driver_id} = req.query;
+        const {status,message} = await this.rideService.getHistory(customer_id,driver_id);
+        return res.status(status).json(message);
+    }
 }

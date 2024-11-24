@@ -32,12 +32,7 @@ module.exports = {
         value: {
             type: Sequelize.INTEGER,
         },
-        created_at: {
-            type: Sequelize.DATE,
-            allowNull: false,
-            defaultValue: Sequelize.NOW
-        },
-        updated_at: { 
+        date: {
             type: Sequelize.DATE,
             allowNull: false,
             defaultValue: Sequelize.NOW

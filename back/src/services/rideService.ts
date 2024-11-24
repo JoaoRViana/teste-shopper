@@ -3,12 +3,12 @@ import { SERVER_RETURN } from "../types"
 import {Sequelize} from "sequelize";
 import DriverModel from "../database/models/DriverModel"
 import TravelHistoryModel from "../database/models/RideHistoryModel";
-import CustomerModel from "../database/models/CustomerModel";
 
 export default class RideService{
 
     private driverModel =  DriverModel;
     private travelHistoryModel = TravelHistoryModel;
+
 
     public async estimateValue (addressOrigin:string,addressDestination:string,customer_id:string):Promise<SERVER_RETURN>{
         if(addressOrigin == addressDestination || !addressOrigin || !addressDestination || !customer_id){
@@ -39,9 +39,30 @@ export default class RideService{
         if(+distance <= +driver.km_mínimo*1000){
             return{status:406,message:{error_code:"INVALID_DISTANCE",error_description:`Quilometragem inválida para o motorista`}}
         }
-        const newHistoryData = {customer_id,origin,destination,distance,duration,driver_id:id,value}
+        const newHistoryData = {customer_id,origin,destination,distance,duration,driver_id:id,value,date:new Date()}
         const newHistory = this.travelHistoryModel.build(newHistoryData);
         newHistory.save();
         return{status:200,message:{sucess:true}}
+    }
+
+    public async getHistory(customer_id:string,driver_id:number|null):Promise<SERVER_RETURN>{
+        let history:any;
+        if(!customer_id){
+            return {status:404,message:{error_code:"NO_RIDES_FOUND",error_description:"Nenhum registro encontrado"}}
+        }
+        if(driver_id){
+            let driver = await this.driverModel.findOne({where:{id:driver_id}})
+            if(!driver){
+                return {status:400,message:{error_code:"INVALID_DRIVER",error_description:"Motorista inválido "}}
+            }
+            history = await this.travelHistoryModel.findAll({where:{driver_id,customer_id}, order: [['date', 'DESC']],})
+        }else{
+            history = await this.travelHistoryModel.findAll({where:{customer_id} ,order: [['date', 'DESC']],})
+        }
+        if(history.length<1){
+            return {status:404,message:{error_code:"NO_RIDES_FOUND",error_description:"Nenhum registro encontrado"}}
+        }
+        return{status:200,message:{customer_id,rides:[...history]}}
+
     }
 }
