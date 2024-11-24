@@ -1,6 +1,6 @@
 FROM node:18 AS build
 
-WORKDIR /front-app
+WORKDIR /usr/src/app
 
 COPY package.json package-lock.json ./
 RUN npm install

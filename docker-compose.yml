@@ -7,18 +7,19 @@ services:
     ports:
       - "8080:8080" 
     volumes:
-      - ./back/src:/app-back/src
+      - ./back/src:/usr/src/app/src 
     environment:
       - NODE_ENV=development
       - GOOGLE_API_KEY=${GOOGLE_API_KEY}
-
+    depends_on:
+      - db
   front:
     build: ./front
     container_name: front-app
     ports:
       - "80:80" 
     volumes:
-      - ./front/src:/app-front/src
+      - ./front/src:/usr/src/app/src 
     depends_on:
       - back
   db:

@@ -45,6 +45,7 @@ DriverModel.init({
 }, {
   sequelize: db,
   modelName: 'drivers',
+  timestamps:false,
 });
 
 export default DriverModel;

@@ -3,7 +3,7 @@
     "dev": "nodemon --exec ts-node src/server.ts",
     "build": "tsc --project tsconfig.json",
     "prestart": "npm run build && npm run db:reset",
-    "db:reset": "npx tsc && npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate"
+    "db:reset": "npx tsc && npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
   },
   "dependencies": {
     "axios": "^1.7.7",
