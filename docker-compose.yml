@@ -17,7 +17,7 @@ services:
     build: ./front
     container_name: front-app
     ports:
-      - "80:80" 
+      - "80:3000" 
     volumes:
       - ./front/src:/usr/src/app/src 
     depends_on:
