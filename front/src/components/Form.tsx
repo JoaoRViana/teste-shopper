@@ -17,14 +17,21 @@ export default function Form(){
     }
 
     return(
-        <main>
-            <h3>Seu nome:</h3>
-            <input onChange={(e)=>setName(e.target.value)}></input>
-            <h3>Endereço de Origem:</h3>
-            <input onChange={(e)=>setOrigin(e.target.value)}></input>
-            <h3>Destino</h3>
-            <input onChange={(e)=>setDestination(e.target.value)}></input>
-            <button onClick={getEstimateValue}>Estimar o valor</button>
+        <main className="flex justify-center items-center h-screen w-full">
+            <div className=" block gap-7 h-[420px] p-10 rounded ">
+                <div className="mb-10">
+                    <input className="rounded h-[34px] pl-4" placeholder="Name" onChange={(e)=>setName(e.target.value)}></input>
+                </div>
+                <div className="mb-10">
+                    <input className="rounded h-[34px] w-[600px] pl-4" placeholder="Address Origin" onChange={(e)=>setOrigin(e.target.value)}></input>
+                </div>
+                <div className="mb-10">
+                    <input className="rounded h-[34px] w-[600px] pl-4" placeholder="Addres destination" onChange={(e)=>setDestination(e.target.value)}></input>
+                </div>
+                <div className="w-full justify-end flex ">
+                    <button onClick={getEstimateValue} className="font-bold text-stone-200 place-self-end rounded bg-green-900 p-2 hover:brightness-125">Estimate Value</button>
+                </div>
+            </div>
         </main>
     )
 }
