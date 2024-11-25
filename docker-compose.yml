@@ -19,7 +19,9 @@ services:
     ports:
       - "80:3000" 
     volumes:
-      - ./front/src:/usr/src/app/src 
+      - ./front/src:/usr/src/app/src
+    environment:
+      - REACT_APP_GOOGLE_API_KEY=${GOOGLE_API_KEY}
     depends_on:
       - back
   db:

@@ -22,11 +22,13 @@ export const getRouteData = async (addressOrigin: string, addressDestination: st
             headers: {
                 "Content-Type": "application/json",
                 "X-Goog-Api-Key": apiKey, 
-                "X-Goog-FieldMask": "routes.duration,routes.distanceMeters,routes.legs.startLocation.latLng,routes.legs.endLocation.latLng",
+                "X-Goog-FieldMask": "routes.duration,routes.distanceMeters,routes.legs.startLocation.latLng,routes.legs.endLocation.latLng,routes.legs.steps.startLocation,routes.legs.steps.endLocation,",
             },
         });
-        const origin = {latitude:response.data.routes[0].legs[0].startLocation.latLng}
-        const destination = {latitude:response.data.routes[0].legs[0].endLocation.latLng}
+        const route = response.data.routes[0];
+        const legs= route.legs[0]
+        const origin = legs.startLocation.latLng
+        const destination = legs.endLocation.latLng
         return{duration:response.data.routes[0].duration,distance:response.data.routes[0].distanceMeters,origin,destination,routeResponse:response.data}
     } catch (error) {
         return {error:400}

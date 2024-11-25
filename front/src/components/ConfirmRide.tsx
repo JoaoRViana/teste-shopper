@@ -14,19 +14,23 @@ export default function ConfirmRide({cancelRide,data}:confirmRideProps){
         
     }
     const getMap = async()=>{
-        const newMap = await renderMap(data.origin,data.destination)
+        const newMap = renderMap(data.routeResponse.routes[0].legs[0].steps)
         setMap(newMap)
     }
     useEffect(()=>{
         getMap()
-    })
-
+    },[data])
+    
     return(
-        <div className="flex justify-center items-center h-screen w-full downToUp" id="confirmRide">
-            {data.options.map((e:TDRIVER)=>(
-                <DriversContainer name={e.name} description={e.description} value={e.value} review={e.review} vehicle={e.vehicle}></DriversContainer>
+        <div className="block justify-center items-center h-screen w-full downToUp" id="confirmRide">
+            <div className="w-full flex justify-center items-center">
+                <img src={map}></img>
+            </div>
+            {data.options.map((e:TDRIVER,i)=>(
+                <div key={`driversContainer${i}`}>
+                    <DriversContainer name={e.name} description={e.description} value={e.value} review={e.review} vehicle={e.vehicle}></DriversContainer>
+                </div>
             ))}
-            <img src={map}></img>
             <button onClick={cancelRide}>Cancel</button>
         </div>
     )

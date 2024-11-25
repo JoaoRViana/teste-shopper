@@ -12,7 +12,12 @@ export function upToDownDisappearAnimation(divId:string):void{
     div?.classList.add('upToDownDisappear')
 }
 
-export async function renderMap(origin:{latitude:string,longitude:string},destination:{latitude:string,longitude:string}){
-    const map =  await fetch(`https://maps.googleapis.com/maps/api/staticmap?size={500}x{400}&path?path=color:0xff0000ff%7weight:5%7${origin.latitude},${origin.longitude}%7${destination.latitude},${destination.longitude}&key=${apiKey}`)
-    return await map.json()
+export function renderMap(routeSteps: Array<{ lat: number; lng: number }>){
+    const path = routeSteps.map((step: any) => {
+        const start = step.startLocation;
+        const end = step.endLocation;
+        return `${start.latLng.latitude},${start.latLng.longitude}%7C${end.latLng.latitude},${end.latLng.longitude}`;
+    }).join("&path=weight:3%7Ccolor:0xff0000%7C");;
+    const map = `https://maps.googleapis.com/maps/api/staticmap?size=600x400&path=weight:3%7Ccolor:0xff0000%7C${path}&key=${apiKey}`;
+    return map;
 }

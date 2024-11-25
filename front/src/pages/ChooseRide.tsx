@@ -24,6 +24,8 @@ export default function ChooseRide() {
             destination,
             origin,
         };
+        const response = await axios.post("http://localhost:8080/ride/estimate",requestBody)
+        setData(response.data)
         setTimeout(()=>{
             setFormSubmit(true);
         },510)
