@@ -1,9 +1,9 @@
 import './App.css';
-import Form from './components/Form';
+import ChooseRide from './pages/ChooseRide';
 function App() {
   return (
     <div className='bg-slate-300'>
-      <Form></Form>
+      <ChooseRide></ChooseRide>
     </div>
   );
 }

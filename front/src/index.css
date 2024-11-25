@@ -2,16 +2,62 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.downToUp {
+  animation: downToUpAnimation 500ms ease-in-out forwards;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@keyframes downToUpAnimation {
+  0% {
+    opacity: 0;
+    transform: translateY(250px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+.upToDown{
+  animation: upToDownAnimation 500ms ease-in-out forwards;
+}
+
+@keyframes upToDownAnimation {
+  0% {
+    opacity: 0;
+    transform: translateY(-250px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+.downToUpDisappear{
+  animation: downToUpDisappearAnimation 500ms ease-in-out forwards;
+}
+
+@keyframes downToUpDisappearAnimation {
+  0% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-250px);
+  }
+}
+
+.upToDownDisappear{
+  animation: upToDownDisappearAnimation 500ms ease-in-out forwards;
+}
+
+@keyframes upToDownDisappearAnimation {
+  0% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(250px);
+  }
 }
