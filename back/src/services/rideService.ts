@@ -20,7 +20,7 @@ export default class RideService{
         }
         let data = await this.driverModel.findAll({ where: Sequelize.literal(`${distance} >= km_mínimo * 1000 `),})
         let drivers = data.sort((a,b)=>a.value - b.value).map((e)=>{
-            return {id:e.id,name:e.name,descritpion:e.description,vehicle:e.vehicle,review:{rating:e.rating,comment:e.comment},value:+(+e.value *(+distance/1000)).toFixed(2)}
+            return {id:e.id,name:e.name,description:e.description,vehicle:e.vehicle,review:{rating:e.rating,comment:e.comment},value:+(+e.value *(+distance/1000)).toFixed(2)}
         })
         return {status:200,message:{origin,destination,distance,duration,options:[...drivers],routeResponse}}
     }

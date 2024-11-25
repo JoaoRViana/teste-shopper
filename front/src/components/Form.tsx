@@ -58,7 +58,7 @@ export default function Form({
                     <button
                         onClick={getEstimateValue}
                         disabled={bttnDisabled}
-                        className="font-bold text-slate-100 place-self-end rounded bg-emerald-600 p-2 enabled:hover:brightness-125 disabled:opacity-75"
+                        className="font-bold text-slate-100 place-self-end rounded bg-black p-2 enabled:hover:brightness-125 disabled:opacity-70"
                     >
                         Estimate Value
                     </button>

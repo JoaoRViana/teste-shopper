@@ -2,7 +2,7 @@ import './App.css';
 import ChooseRide from './pages/ChooseRide';
 function App() {
   return (
-    <div className='bg-slate-300'>
+    <div >
       <ChooseRide></ChooseRide>
     </div>
   );

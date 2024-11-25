@@ -1,4 +1,5 @@
 export type TDRIVER={
+    id:number,
     name:string,
     vehicle:string,
     value:number,
@@ -7,10 +8,20 @@ export type TDRIVER={
 }
 
 export type TRIDEESTIMATE={
-    origin:{latitude:string,longitude:string},
-    destination:{latitude:string,longitude:string},
+    origin:{latitude:number,longitude:number},
+    destination:{latitude:number,longitude:number},
     distance:number,
     duration:string,
     options:TDRIVER[],
     routeResponse:any,
+}
+
+export type TSAVERIDE={
+    customer_id: string;
+    origin: string;
+    destination: string;
+    distance: number;
+    duration: string;
+    driver: { id:number,name: string };
+    value: number;
 }
