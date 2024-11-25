@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 interface FormProps {
     customer_id: string;
     destination: string;
@@ -17,6 +19,14 @@ export default function Form({
     setOrigin,
     getEstimateValue,
 }: FormProps) {
+    const[bttnDisabled,setBttnDisabled] = useState<boolean>(true);
+    useEffect(()=>{
+        if(customer_id.length>0 && destination.length>0 && origin.length>0){
+            setBttnDisabled(false)
+        }else{
+            setBttnDisabled(true)
+        }
+    },[customer_id,destination,origin])
     return (
         <div className="flex justify-center items-center h-screen w-full upToDown" id="formRide">
             <div className="block gap-7 h-[420px] p-10 rounded">
@@ -47,7 +57,8 @@ export default function Form({
                 <div className="w-full justify-end flex">
                     <button
                         onClick={getEstimateValue}
-                        className="font-bold text-stone-200 place-self-end rounded bg-green-900 p-2 hover:brightness-125"
+                        disabled={bttnDisabled}
+                        className="font-bold text-slate-100 place-self-end rounded bg-emerald-600 p-2 enabled:hover:brightness-125 disabled:opacity-75"
                     >
                         Estimate Value
                     </button>
