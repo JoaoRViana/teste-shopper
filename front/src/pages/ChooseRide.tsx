@@ -37,6 +37,19 @@ export default function ChooseRide() {
             },510)
             downToUpDisappearAnimation('formRide');
         } catch (error:any) {
+            if(!error.response){
+                toast.error("Não foi possível conectar com o servidor",{
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    theme:'dark'
+                })
+                cleanInputs()
+                return
+            }
             toast.error(error.response.data.error_description,{
                 position: "top-right",
                 autoClose: 3000,

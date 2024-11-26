@@ -33,7 +33,7 @@ export default function Form({
                 <div className="mb-10">
                     <input
                         className="rounded h-[34px] pl-4"
-                        placeholder="Name"
+                        placeholder="Nome"
                         value={customer_id}
                         onChange={(e) => setCustomerId(e.target.value)}
                     />
@@ -41,7 +41,7 @@ export default function Form({
                 <div className="mb-10">
                     <input
                         className="rounded h-[34px] w-[600px] pl-4"
-                        placeholder="Address Origin"
+                        placeholder="Endereço de origem"
                         value={origin}
                         onChange={(e) => setOrigin(e.target.value)}
                     />
@@ -49,7 +49,7 @@ export default function Form({
                 <div className="mb-10">
                     <input
                         className="rounded h-[34px] w-[600px] pl-4"
-                        placeholder="Address Destination"
+                        placeholder="Endereço de destino"
                         value={destination}
                         onChange={(e) => setDestination(e.target.value)}
                     />
@@ -60,7 +60,7 @@ export default function Form({
                         disabled={bttnDisabled}
                         className="text-slate-100 place-self-end rounded bg-black p-2 enabled:hover:brightness-125 disabled:opacity-70"
                     >
-                        Estimate Value
+                       Estimar valor
                     </button>
                 </div>
             </div>

@@ -2,16 +2,44 @@ import axios from "axios";
 import { useEffect, useState } from "react"
 import HistoryContainer from "../components/HistoryContainer";
 import { toast } from "react-toastify";
+import { TDRIVER, THISTORYRIDES } from "../types";
+import { useNavigate } from "react-router-dom";
 
 
 export default function HistoryRides(){
     const [customer_id,setCustomerId]=useState<string>('');
-    const [alldrivers,setAllDrivers]=useState([]);
-    const [selectedDriver,setSelectedDriver]= useState('');
-    const [history,setHistory]=useState([]);
+    const [alldrivers,setAllDrivers]=useState<TDRIVER[]>([]);
+    const [selectedDriver,setSelectedDriver]= useState<string>('');
+    const [history,setHistory]=useState<THISTORYRIDES[]>([]);
+    const navigate = useNavigate()
     const getAllDrivers =async()=>{
-        const response = await axios.get('http://localhost:8080/drivers')
-        setAllDrivers(response.data)
+        try {
+            const response = await axios.get('http://localhost:8080/drivers')
+            setAllDrivers(response.data)
+        } catch (error:any) {
+            if(!error.response){
+                toast.error("Não foi possível conectar com o servidor",{
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    theme:'dark'
+                })
+                return
+            }
+            toast.error(error.response.data.error_description,{
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                theme:'dark'
+            })
+        }
+
     }
     useEffect(()=>{
         getAllDrivers()
@@ -20,9 +48,21 @@ export default function HistoryRides(){
     const getHistory = async()=>{
         try {
             const response = await axios.get(`http://localhost:8080/ride/${customer_id}?driver_id=${selectedDriver}`)
-            setHistory(response.data.rides);
+            setHistory(response.data.rides)
 
         } catch (error:any) {
+            if(!error.response){
+                toast.error("Não foi possível conectar com o servidor",{
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    theme:'dark'
+                })
+                return
+            }
             toast.error(error.response.data.error_description,{
                 position: "top-right",
                 autoClose: 3000,
@@ -37,10 +77,13 @@ export default function HistoryRides(){
 
     return(
         <div className="block justify-center items-center  w-full  p-10">
+            <div className="flex justify-end w-full">
+                <button className="font-bold text-slate-100 place-self-end rounded bg-black p-2 hover:brightness-125 " onClick={()=>navigate('/')}>Voltar</button>
+            </div>
             <div className="mb-10 flex justify-center flex-wrap gap-2 font-bold">
                 <input
                     className="rounded h-[40px] pl-4 font-bold"
-                    placeholder="Name"
+                    placeholder="Nome"
                     value={customer_id}
                     onChange={(e) => setCustomerId(e.target.value)}
                 />
@@ -57,7 +100,7 @@ export default function HistoryRides(){
                 <button className="font-bold text-slate-100 place-self-end rounded bg-black p-2 hover:brightness-125 " onClick={getHistory}>Buscar</button>
             </div>
             <div className="py-2 flex flex-col items-center gap-4">
-                {history.map((e:any)=>(
+                {history.map((e:THISTORYRIDES)=>(
                     <HistoryContainer date={e.date} name={e.driver.name} origin={e.origin} destination={e.destination} distance={e.distance} duration={e.duration} value={e.value}                    
                     />
                 ))}
