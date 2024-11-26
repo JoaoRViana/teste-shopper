@@ -55,13 +55,14 @@ export default class RideService{
             if(!driver){
                 return {status:400,message:{error_code:"INVALID_DRIVER",error_description:"Motorista inválido "}}
             }
-            history = await this.travelHistoryModel.findAll({where:{driver_id,customer_id}, order: [['date', 'DESC']],})
+            history = await this.travelHistoryModel.findAll({where:{driver_id,customer_id},include:[{model:this.driverModel,as:'driver',attributes:['id','name']}],attributes:{exclude:['driver_id','customer_id']}, order: [['date', 'DESC']],})
         }else{
-            history = await this.travelHistoryModel.findAll({where:{customer_id} ,order: [['date', 'DESC']],})
+            history = await this.travelHistoryModel.findAll({where:{customer_id},include:[{model:this.driverModel,as:'driver',attributes:['id','name']}],attributes:{exclude:['driver_id','customer_id']} ,order: [['date', 'DESC']],})
         }
         if(history.length<1){
             return {status:404,message:{error_code:"NO_RIDES_FOUND",error_description:"Nenhum registro encontrado"}}
         }
+        
         return{status:200,message:{customer_id,rides:[...history]}}
 
     }

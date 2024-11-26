@@ -3,17 +3,20 @@ import db from './index';
 import DriverModel from './DriverModel';
 import CustomerModel from './CustomerModel';
 
-
 class RideHistoryModel extends Model<InferAttributes<RideHistoryModel>, InferCreationAttributes<RideHistoryModel>> {
   declare id: CreationOptional<number>;
   declare customer_id: string;
   declare driver_id: number;
   declare origin: string;
-  declare destination:string;
+  declare destination: string;
   declare distance: number;
   declare duration: string;
   declare value: number;
-  declare date:Date;
+  declare date: Date;
+  declare driver?: {
+    id: number;
+    name: string;
+  };
 }
 
 RideHistoryModel.init(
@@ -24,18 +27,18 @@ RideHistoryModel.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    date:{
-      type:DataTypes.DATE,
-      allowNull:false,
-      defaultValue:DataTypes.NOW
+    date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
     },
     customer_id: {
-        type: DataTypes.STRING,
-        allowNull: false,
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     driver_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
     origin: {
       type: DataTypes.STRING,
@@ -50,8 +53,8 @@ RideHistoryModel.init(
       type: DataTypes.STRING,
     },
     value: {
-      type: DataTypes.INTEGER,
-    }
+      type: DataTypes.FLOAT,
+    },
   },
   {
     sequelize: db,
@@ -63,6 +66,5 @@ RideHistoryModel.init(
 
 RideHistoryModel.belongsTo(DriverModel, { foreignKey: 'driver_id', as: 'driver' });
 RideHistoryModel.belongsTo(CustomerModel, { foreignKey: 'customer_id', as: 'customer' });
-
 
 export default RideHistoryModel;

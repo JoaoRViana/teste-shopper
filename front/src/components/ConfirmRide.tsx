@@ -4,6 +4,8 @@ import { renderMap } from "../utils";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+
 
 interface ConfirmRideProps {
   cancelRide: () => void;
@@ -21,6 +23,7 @@ export default function ConfirmRide({
   origin,
 }: ConfirmRideProps) {
   const [map, setMap] = useState<string>("");
+  const navigate = useNavigate();
 
   const getMap = () => {
     const newMap = renderMap(data.routeResponse.routes[0].legs[0].steps);
@@ -32,8 +35,8 @@ export default function ConfirmRide({
   }: TSAVERIDE): Promise<void> => {
     const requestBody={customer_id,origin,destination,distance,duration,driver:{id,name},value}
     try {
-      const response = await axios.patch('http://localhost:8080/ride/confirm',requestBody)
-      console.log(response)
+      await axios.patch('http://localhost:8080/ride/confirm',requestBody)
+      navigate('/history')
     } catch (error:any) {
         toast.error(error.response.data.error_description,{
         position: "top-right",
@@ -42,6 +45,7 @@ export default function ConfirmRide({
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
+        theme:'dark'
     })
     }
   };

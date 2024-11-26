@@ -44,6 +44,7 @@ export default function ChooseRide() {
                 closeOnClick: true,
                 pauseOnHover: true,
                 draggable: true,
+                theme:'dark'
             })
             cleanInputs()
         }

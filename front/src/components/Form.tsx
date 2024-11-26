@@ -28,7 +28,7 @@ export default function Form({
         }
     },[customer_id,destination,origin])
     return (
-        <div className="flex justify-center items-center h-screen w-full upToDown" id="formRide">
+        <div className="flex justify-center items-center h-screen w-full upToDown font-bold" id="formRide">
             <div className="block gap-7 h-[420px] p-10 rounded">
                 <div className="mb-10">
                     <input
@@ -58,7 +58,7 @@ export default function Form({
                     <button
                         onClick={getEstimateValue}
                         disabled={bttnDisabled}
-                        className="font-bold text-slate-100 place-self-end rounded bg-black p-2 enabled:hover:brightness-125 disabled:opacity-70"
+                        className="text-slate-100 place-self-end rounded bg-black p-2 enabled:hover:brightness-125 disabled:opacity-70"
                     >
                         Estimate Value
                     </button>
