@@ -34,7 +34,7 @@ interface HistoryContainerProps {
         <div className="flex flex-col font-bold test-sm gap-2">
           <p className="">Origem: {origin}</p>
           <p className="">Destino: {destination}</p>
-          <p className="">Distância: {distance} km</p>
+          <p className="">Distância: {distance} m</p>
           <p className="">Duração: {duration}</p>
         </div>
         <div className="flex justify-center items-center w-full">

@@ -1,7 +1,6 @@
 import { DataTypes, Model, InferAttributes, InferCreationAttributes, CreationOptional } from 'sequelize';
 import db from './index';
 import DriverModel from './DriverModel';
-import CustomerModel from './CustomerModel';
 
 class RideHistoryModel extends Model<InferAttributes<RideHistoryModel>, InferCreationAttributes<RideHistoryModel>> {
   declare id: CreationOptional<number>;
@@ -65,6 +64,5 @@ RideHistoryModel.init(
 );
 
 RideHistoryModel.belongsTo(DriverModel, { foreignKey: 'driver_id', as: 'driver' });
-RideHistoryModel.belongsTo(CustomerModel, { foreignKey: 'customer_id', as: 'customer' });
 
 export default RideHistoryModel;

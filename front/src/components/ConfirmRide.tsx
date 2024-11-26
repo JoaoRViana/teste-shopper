@@ -26,7 +26,7 @@ export default function ConfirmRide({
   const navigate = useNavigate();
 
   const getMap = () => {
-    const newMap = renderMap(data.routeResponse.routes[0].legs[0].steps);
+    const newMap = renderMap(data.routeResponse.routes[0].polyline.encodedPolyline);
     setMap(newMap);
   };
 

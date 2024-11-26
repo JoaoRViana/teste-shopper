@@ -17,11 +17,12 @@ services:
     build: ./front
     container_name: front-app
     ports:
-      - "80:3000" 
+      - "80:80" 
     volumes:
       - ./front/src:/usr/src/app/src
     environment:
       - REACT_APP_GOOGLE_API_KEY=${GOOGLE_API_KEY}
+      - PORT=80
     depends_on:
       - back
   db:

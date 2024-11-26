@@ -22,7 +22,7 @@ export const getRouteData = async (addressOrigin: string, addressDestination: st
             headers: {
                 "Content-Type": "application/json",
                 "X-Goog-Api-Key": apiKey, 
-                "X-Goog-FieldMask": "routes.duration,routes.distanceMeters,routes.legs.startLocation.latLng,routes.legs.endLocation.latLng,routes.legs.steps.startLocation,routes.legs.steps.endLocation,",
+                "X-Goog-FieldMask": "routes.duration,routes.distanceMeters,routes.legs.startLocation.latLng,routes.legs.endLocation.latLng,routes.polyline.encodedPolyline",
             },
         });
         const route = response.data.routes[0];

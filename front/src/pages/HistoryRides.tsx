@@ -49,8 +49,8 @@ export default function HistoryRides(){
         try {
             const response = await axios.get(`http://localhost:8080/ride/${customer_id}?driver_id=${selectedDriver}`)
             setHistory(response.data.rides)
-
         } catch (error:any) {
+            setHistory([])
             if(!error.response){
                 toast.error("Não foi possível conectar com o servidor",{
                     position: "top-right",
@@ -97,7 +97,8 @@ export default function HistoryRides(){
                         </option>
                     ))}
                 </select>
-                <button className="font-bold text-slate-100 place-self-end rounded bg-black p-2 hover:brightness-125 " onClick={getHistory}>Buscar</button>
+                <button className="font-bold text-slate-100 place-self-end rounded bg-black p-2 enable:hover:brightness-125 disabled:opacity-70
+                " disabled={customer_id.length<1} onClick={getHistory}>Buscar</button>
             </div>
             <div className="py-2 flex flex-col items-center gap-4">
                 {history.map((e:THISTORYRIDES)=>(
