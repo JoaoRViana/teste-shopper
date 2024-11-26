@@ -2,6 +2,8 @@ import { TDRIVER, TRIDEESTIMATE, TSAVERIDE } from "../types";
 import DriversContainer from "./DriversContainer";
 import { renderMap } from "../utils";
 import { useEffect, useState } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 interface ConfirmRideProps {
   cancelRide: () => void;
@@ -26,14 +28,22 @@ export default function ConfirmRide({
   };
 
   const saveRide = async ({
-    customer_id,
-    origin,
-    destination,
-    distance,
-    duration,
-    driver: { id, name },
-    value,
+    customer_id, origin,destination,distance,duration,driver: { id, name },value,
   }: TSAVERIDE): Promise<void> => {
+    const requestBody={customer_id,origin,destination,distance,duration,driver:{id,name},value}
+    try {
+      const response = await axios.patch('http://localhost:8080/ride/confirm',requestBody)
+      console.log(response)
+    } catch (error:any) {
+        toast.error(error.response.data.error_description,{
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+    })
+    }
   };
 
   useEffect(() => {

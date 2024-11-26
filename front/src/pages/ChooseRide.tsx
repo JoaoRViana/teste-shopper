@@ -4,7 +4,6 @@ import Form from "../components/Form";
 import ConfirmRide from "../components/ConfirmRide";
 import { downToUpDisappearAnimation, upToDownDisappearAnimation } from "../utils";
 import { TRIDEESTIMATE } from "../types";
-import { oneDriveReturn, twoDrivers } from "../fakeData";
 import { toast } from "react-toastify";
 export default function ChooseRide() {
     const [customer_id, setCustomerId] = useState<string>("");
@@ -30,25 +29,24 @@ export default function ChooseRide() {
             destination,
             origin,
         };
-        const response = await axios.post("http://localhost:8080/ride/estimate",requestBody)
-        if(response.status !==200){
-            toast.error(response.data.error_description,{
+        try {
+            const response = await axios.post("http://localhost:8080/ride/estimate",requestBody)
+            setData(response.data)
+            setTimeout(()=>{
+                setFormSubmit(true);
+            },510)
+            downToUpDisappearAnimation('formRide');
+        } catch (error:any) {
+            toast.error(error.response.data.error_description,{
                 position: "top-right",
                 autoClose: 3000,
                 hideProgressBar: true,
                 closeOnClick: true,
                 pauseOnHover: true,
                 draggable: true,
-                theme: "dark",
             })
             cleanInputs()
-            return;
         }
-        setData(twoDrivers)
-        setTimeout(()=>{
-            setFormSubmit(true);
-        },510)
-        downToUpDisappearAnimation('formRide');
     };
     const cancelRide = ():void=>{
         setTimeout(()=>{
