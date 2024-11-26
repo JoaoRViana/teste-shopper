@@ -77,7 +77,7 @@ export default function HistoryRides(){
 
     return(
         <div className="block justify-center items-center  w-full  p-10">
-            <div className="flex justify-end w-full">
+            <div className="flex justify-end w-full py-2">
                 <button className="font-bold text-slate-100 place-self-end rounded bg-black p-2 hover:brightness-125 " onClick={()=>navigate('/')}>Voltar</button>
             </div>
             <div className="mb-10 flex justify-center flex-wrap gap-2 font-bold">

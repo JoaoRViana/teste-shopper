@@ -40,7 +40,7 @@ export default function Form({
                 </div>
                 <div className="mb-10">
                     <input
-                        className="rounded h-[34px] w-[600px] pl-4"
+                        className="rounded h-[34px] pl-4"
                         placeholder="Endereço de origem"
                         value={origin}
                         onChange={(e) => setOrigin(e.target.value)}
@@ -48,7 +48,7 @@ export default function Form({
                 </div>
                 <div className="mb-10">
                     <input
-                        className="rounded h-[34px] w-[600px] pl-4"
+                        className="rounded h-[34px] pl-4"
                         placeholder="Endereço de destino"
                         value={destination}
                         onChange={(e) => setDestination(e.target.value)}
