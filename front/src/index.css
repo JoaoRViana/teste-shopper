@@ -34,6 +34,7 @@
 
 .downToUpDisappear{
   animation: downToUpDisappearAnimation 500ms ease-in-out forwards;
+  position: relative;
 }
 
 @keyframes downToUpDisappearAnimation {
@@ -49,6 +50,7 @@
 
 .upToDownDisappear{
   animation: upToDownDisappearAnimation 500ms ease-in-out forwards;
+  position: relative;
 }
 
 @keyframes upToDownDisappearAnimation {

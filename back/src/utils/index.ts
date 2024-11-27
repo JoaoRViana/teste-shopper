@@ -22,14 +22,14 @@ export const getRouteData = async (addressOrigin: string, addressDestination: st
             headers: {
                 "Content-Type": "application/json",
                 "X-Goog-Api-Key": apiKey, 
-                "X-Goog-FieldMask": "routes.duration,routes.distanceMeters,routes.legs.startLocation.latLng,routes.legs.endLocation.latLng,routes.polyline.encodedPolyline",
+                "X-Goog-FieldMask": "routes",
             },
         });
         const route = response.data.routes[0];
         const legs= route.legs[0]
         const origin = legs.startLocation.latLng
         const destination = legs.endLocation.latLng
-        return{duration:response.data.routes[0].duration,distance:response.data.routes[0].distanceMeters,origin,destination,routeResponse:response.data}
+        return{duration:route.duration,distance:route.distanceMeters,origin,destination,routeResponse:response.data}
     } catch (error) {
         return {error:400}
     }

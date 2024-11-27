@@ -4,6 +4,7 @@ import HistoryContainer from "../components/HistoryContainer";
 import { toast } from "react-toastify";
 import { TDRIVER, THISTORYRIDES } from "../types";
 import { useNavigate } from "react-router-dom";
+import { disappearAnimation } from "../utils";
 
 
 export default function HistoryRides(){
@@ -74,11 +75,15 @@ export default function HistoryRides(){
             })
         }
     }
-
     return(
-        <div className="block justify-center items-center  w-full  p-10">
+        <div className="block justify-center items-center downToUp w-full p-10" id="historyPage">
             <div className="flex justify-end w-full py-2">
-                <button className="font-bold text-slate-100 place-self-end rounded bg-black p-2 hover:brightness-125 " onClick={()=>navigate('/')}>Voltar</button>
+                <button className="font-bold text-slate-100 place-self-end rounded bg-black p-2 hover:brightness-125 " onClick={()=>{
+                            setTimeout(()=>{
+                                navigate('/')
+                            },510)
+                            disappearAnimation('historyPage','downToUp','upToDownDisappear')
+                    }}>Voltar</button>
             </div>
             <div className="mb-10 flex justify-center flex-wrap gap-2 font-bold">
                 <input
@@ -97,7 +102,7 @@ export default function HistoryRides(){
                         </option>
                     ))}
                 </select>
-                <button className="font-bold text-slate-100 place-self-end rounded bg-black p-2 enable:hover:brightness-125 disabled:opacity-70
+                <button className="font-bold text-slate-100 place-self-end rounded bg-black p-2 enabled:hover:brightness-125 disabled:opacity-70
                 " disabled={customer_id.length<1} onClick={getHistory}>Buscar</button>
             </div>
             <div className="py-2 flex flex-col items-center gap-4">

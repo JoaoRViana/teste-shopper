@@ -1,15 +1,15 @@
 const apiKey = process.env.REACT_APP_GOOGLE_API_KEY;
 
-export function downToUpDisappearAnimation(divId:string):void{
+export function disappearAnimation(divId:string,oldClass:string,animation:string):void{
     const div = document.getElementById(divId)
-    div?.classList.remove('upToDown')
-    div?.classList.add('downToUpDisappear')
-}
-
-export function upToDownDisappearAnimation(divId:string):void{
-    const div = document.getElementById(divId)
-    div?.classList.remove('downToUp')
-    div?.classList.add('upToDownDisappear')
+    div?.classList.remove(oldClass)
+    div?.classList.add(animation)
+    const bodyHeight = document.body.scrollHeight;
+    const body = document.getElementsByTagName('body')[0]
+    body.style.height= `${bodyHeight}px`
+    setTimeout(() => {
+        body.style.height='100%'
+    }, 510);
 }
 
 export function renderMap(polyline:string){

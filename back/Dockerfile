@@ -17,4 +17,4 @@ RUN apk update --no-cache \
 
 EXPOSE 8080
 
-CMD ["dockerize", "-wait", "tcp://db:3306", "-timeout", "300s", "npm", "run", "dev"]
+CMD ["dockerize", "-wait", "tcp://db:3306", "-timeout", "600s", "npm", "run", "dev"]

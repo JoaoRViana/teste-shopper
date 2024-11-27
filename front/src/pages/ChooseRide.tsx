@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import Form from "../components/Form";
 import ConfirmRide from "../components/ConfirmRide";
-import { downToUpDisappearAnimation, upToDownDisappearAnimation } from "../utils";
+import { disappearAnimation } from "../utils";
 import { TRIDEESTIMATE } from "../types";
 import { toast } from "react-toastify";
 export default function ChooseRide() {
@@ -35,7 +35,7 @@ export default function ChooseRide() {
             setTimeout(()=>{
                 setFormSubmit(true);
             },510)
-            downToUpDisappearAnimation('formRide');
+            disappearAnimation('formRide','upToDown','downToUpDisappear')
         } catch (error:any) {
             if(!error.response){
                 toast.error("Não foi possível conectar com o servidor",{
@@ -66,7 +66,7 @@ export default function ChooseRide() {
         setTimeout(()=>{
             setFormSubmit(false)
         },510)
-        upToDownDisappearAnimation('confirmRide')
+        disappearAnimation('confirmRide','downToUp','upToDownDisappear')
         cleanInputs()
     }
 

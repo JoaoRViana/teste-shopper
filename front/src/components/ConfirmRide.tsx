@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-
+import { disappearAnimation } from "../utils";
 
 interface ConfirmRideProps {
   cancelRide: () => void;
@@ -36,7 +36,10 @@ export default function ConfirmRide({
     const requestBody={customer_id,origin,destination,distance,duration,driver:{id,name},value}
     try {
       await axios.patch('http://localhost:8080/ride/confirm',requestBody)
-      navigate('/history')
+      setTimeout(()=>{
+        navigate('/history')
+    },510)
+    disappearAnimation('confirmRide','upToDown','downToUpDisappear')
     } catch (error:any) {
         toast.error(error.response.data.error_description,{
         position: "top-right",
@@ -60,7 +63,7 @@ export default function ConfirmRide({
         <img className="rounded " src={map} alt="Route Map" />
       </div>
       <div className="flex justify-center items-center py-2">
-        <h2 className="text-lg font-bold">{customer_id} escolha um motorista</h2>
+        <h2 className="text-lg font-bold">Escolha um motorista</h2>
       </div>
       <div className="py-2 flex flex-col items-center gap-4">
         {data.options.map((e: TDRIVER) => (
